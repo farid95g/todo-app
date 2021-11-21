@@ -1,10 +1,38 @@
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 
-const Form = () => {
+const Form = ({
+  newTodoText,
+  setNewTodoText,
+  todos,
+  setTodos
+}) => {
+  const todoTextHandler = (e) => {
+    setNewTodoText(e.target.value);
+  }
+
+  const submitTodoHandler = (e) => {
+    e.preventDefault();
+    setTodos([
+      ...todos, {
+        id: uuid(),
+        text: newTodoText,
+        completed: false
+      }
+    ]);
+    setNewTodoText("");
+  }
+
   return (
     <form>
-      <input type="text" className="todo-input" />
-      <button className="todo-button" type="submit">
+      <input
+        onChange={todoTextHandler}
+        value={newTodoText}
+        type="text"
+        className="todo-input"
+      />
+
+      <button onClick={submitTodoHandler} className="todo-button" type="submit">
         <i className="fas fa-plus-square"></i>
       </button>
 
