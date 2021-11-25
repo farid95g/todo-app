@@ -3,7 +3,8 @@ import Todo from './Todo';
 
 const TodoList = ({
   todos,
-  setTodos
+  setTodos,
+  filteredTodos
 }) => {
   const completeTodo = (id) => {
     setTodos(todos.map(todo => {
@@ -20,7 +21,7 @@ const TodoList = ({
   return (
     <div className="todo-container">
       <ul className="todo-list">
-        {todos.map(todo => (
+        {filteredTodos.map(todo => (
           <Todo
             id={todo.id}
             text={todo.text}
